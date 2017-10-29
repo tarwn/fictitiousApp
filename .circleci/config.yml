@@ -18,7 +18,7 @@ jobs:
 
       - add-ssh-keys:
           fingerprints:
-            - "${GITHUB_SSH_FINGERPRINT}"
+            - "89:b6:4e:b3:e7:7a:0b:b4:82:02:a3:e0:34:ce:0e:8d"
 
       - deploy:
           command: |
