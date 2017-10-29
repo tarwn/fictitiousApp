@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build:
+  ci:
     working_directory: ~/app
     docker:
       - image: circleci/node:7.10
@@ -23,5 +23,14 @@ jobs:
       - deploy:
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ];
-              then ./build/publish.sh production;
+              then ./build/publish.sh staging;
             fi
+
+workflows:
+  version: 2
+  ci:
+    jobs:
+      - ci
+          filters: 
+            branches:
+              only: master
