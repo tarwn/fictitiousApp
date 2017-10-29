@@ -16,8 +16,12 @@ jobs:
 #          name: Unit Tests
 #          command: npm test
 
-      - deploy:
-          command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ];
-              then ./scripts/publish.sh production;
-            fi
+      # - add-ssh-keys:
+      #     fingerprints:
+      #       - "SO:ME:FIN:G:ER:PR:IN:T"
+
+      # - deploy:
+      #     command: |
+      #       if [ "${CIRCLE_BRANCH}" == "master" ];
+      #         then ./build/publish.sh production;
+      #       fi
