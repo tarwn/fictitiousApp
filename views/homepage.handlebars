@@ -1,0 +1,11 @@
+<h1>Welcome!</h1>
+
+<h2>On Sale Now!</h2>
+{{#each topItems}}
+	<div class="fc-item">
+		<div><img src="{{{imageUrl}}}" /></div>
+		<div class="fc-item-name">{{{name}}}</div>
+		<div class="fc-item-price">{{{price}}}</div>
+		<div><a href="javascript: void(0);" class="fc-button" data-itemId="{{{id}}}">Add</a></div>
+	</div>
+{{/each}}

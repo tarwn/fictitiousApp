@@ -1,0 +1,99 @@
+<!doctype html>
+
+<html>
+
+<head>
+  <title>Test All The Elements | Fictitious Companny, Inc</title>
+  <!-- <link rel='stylesheet' href='/css/style.css'> -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+</head>
+<body>
+<nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse" role="navigation">
+	<a href="#" class="navbar-brand">LOGO!</a>
+	<ul class="nav navbar-nav mr-auto" style="margin-left: 30px">
+	  <li class="nav-item" class="active"><a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a></li>
+	  <li class="nav-item"><a class="nav-link" href="/about">About us</a></li>
+	  <li class="nav-item"><a class="nav-link" href="/contact">Contact us</a></li>
+	</ul>
+</nav>
+<div class="container" style="margin-top: 56px">
+	<ul>
+		<li><a href="#instantPage">Instant</a></li>
+		<li><a href="#fastPage">Fast</a></li>
+		<li><a href="#slowPage">Slow</a></li>
+		<li><a href="#builtPage">Progressive Built</a></li>
+	</ul>
+	<div class="" id="loadingThing">
+	<h1>Loading....</h1>
+	</div>
+	<div class="fakePage" id="instantPage" style="display: none">
+		<h1 id="title-instant">This is Instant Page</h1>
+	</div>
+	<div class="fakePage" id="fastPage" style="display: none">
+		<h1 id="title-fast">This is Fast Page</h1>
+	</div>
+	<div class="fakePage" id="slowPage" style="display: none">
+		<h1 id="title-slow">This is Slow Page</h1>
+	</div>
+	<!-- 'Built Page' will go here -->
+</div>
+<hr/>
+<footer>
+	<p>&copy; Fictitious Company LLC, 2017</p>
+</footer>
+
+<script>
+$(document).ready(function(){
+
+
+	$(window).on('hashchange', switchPage);
+	
+	switchPage();
+	
+	function switchPage(){
+		// examine the URL to determine page to load
+		var hash = location.hash || "#instantPage";
+
+		$(".fakePage").hide();
+		$("#builtPage").remove();
+		$("#loadingThing").show();
+	
+		switch(hash){
+			case "#instantPage":
+				$("#loadingThing").hide();
+				$(hash).show();
+				break;
+			case "#fastPage":
+				setTimeout(function(){
+					$("#loadingThing").hide();
+					$(hash).show();
+				}, 500);
+				break;
+			case "#slowPage":
+				setTimeout(function(){
+					$("#loadingThing").hide();
+					$(hash).show();
+				}, 5000);
+				break;
+			case "#builtPage":
+				// delay to add then delay to show
+				setTimeout(function(){
+					$(".container").append("<div class='fakePage' id='builtPage' style='display: none'><h1 id='title-built'>This is Built Page</h1></div>");
+					setTimeout(function(){
+						$("#loadingThing").hide();
+						$(hash).show();
+					}, 500);
+				}, 500);
+				break;
+				
+		}
+	}
+	
+
+});
+</script>
+</body>
+</html>
