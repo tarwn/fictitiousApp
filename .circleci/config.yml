@@ -16,12 +16,12 @@ jobs:
 #          name: Unit Tests
 #          command: npm test
 
-      # - add-ssh-keys:
-      #     fingerprints:
-      #       - "SO:ME:FIN:G:ER:PR:IN:T"
+      - add-ssh-keys:
+          fingerprints:
+            - "${GITHUB_SSH_FINGERPRINT}"
 
-      # - deploy:
-      #     command: |
-      #       if [ "${CIRCLE_BRANCH}" == "master" ];
-      #         then ./build/publish.sh production;
-      #       fi
+      - deploy:
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ];
+              then ./build/publish.sh production;
+            fi
