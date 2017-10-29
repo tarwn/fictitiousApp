@@ -3,7 +3,7 @@ var express = require('express'),
     argv = require('yargs').argv;
 
 // Express setup
-var app = express()
+var app = express();
 
 var hbs = exphbs.create({
     defaultLayout: 'main',
@@ -12,14 +12,6 @@ var hbs = exphbs.create({
             return context.reduce(function (ret, c) {
                 return ret + options.fn(c);
             }, '');
-
-            var ret = "";
-
-            for (var i = 0, j = context.length; i < j; i++) {
-                ret = ret + options.fn(context[i]);
-            }
-
-            return ret;
         }
     }
 });
@@ -40,7 +32,7 @@ var database = {
 }
 
 // Routes
-app.use(express.static('assets'))
+app.use(express.static('assets'));
 
 app.get('/test/allTheElements', function (req, res) {
     res.render('testAllTheElements');
