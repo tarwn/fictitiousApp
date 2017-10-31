@@ -20,11 +20,11 @@ jobs:
           fingerprints:
             - "89:b6:4e:b3:e7:7a:0b:b4:82:02:a3:e0:34:ce:0e:8d"
 
-      - deploy:
-          command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ];
-              then ./build/publish.sh staging;
-            fi
+      # - deploy:
+      #     command: |
+      #       if [ "${CIRCLE_BRANCH}" == "master" ];
+      #         then ./build/publish.sh circle-staging $CIRCLE_BUILD_NUM;
+      #       fi
 
 workflows:
   version: 2
