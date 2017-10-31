@@ -16,6 +16,8 @@ jobs:
 #          name: Unit Tests
 #          command: npm test
 
+  deploy-staging:
+
       - add-ssh-keys:
           fingerprints:
             - "81:c8:44:89:af:ef:08:f3:4b:a7:85:77:ae:38:bd:50"
@@ -39,3 +41,5 @@ workflows:
           filters: 
             branches:
               only: master
+      - deploy-staging:
+          requires: ci
