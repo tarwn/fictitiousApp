@@ -52,7 +52,7 @@ app.get('/', function (req, res) {
     res.render('homepage', { topItems: topItems });
 });
 
-var port = argv.port || process.env.port;
+var port = argv.port || process.env.PORT;
 app.listen(port, function () {
     console.log('Fictitious Company Inc App: Running on port ' + port);
 })
