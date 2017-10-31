@@ -42,4 +42,5 @@ workflows:
             branches:
               only: master
       - deploy-staging:
-          requires: ci
+          requires: 
+            - ci
