@@ -17,6 +17,12 @@ jobs:
 #          command: npm test
 
   deploy-staging:
+    working_directory: ~/app
+    docker:
+      - image: circleci/node:7.10
+
+    steps:
+      - checkout
 
       - add-ssh-keys:
           fingerprints:
@@ -35,7 +41,7 @@ jobs:
 
 workflows:
   version: 2
-  ci:
+  do-the-things:
     jobs:
       - ci:
           filters: 
