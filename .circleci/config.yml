@@ -39,19 +39,24 @@ jobs:
             fi
   
   test-staging:
-    working_directory: ~/build/launchready
     docker:
       - image: circleci/node:7.10
 
     steps:
       - checkout
 
+      # Moved from individual run steps and external script because working directory is not a dir in checkout, it's a parent dir setting
+      - run:
+          name: LaunchReady Dependencies
+          command: |
+            cd build/launchready
+            npm install
+
       - run:
           name: LaunchReady Testing
           command: |
             pwd
             cd build/launchready
-            npm install
             node build.js $LR_APPLICATIONID --appId=$LR_APPID --apiKey=$LR_APIKEY --name="CircleCI-$CIRCLE_BUILD_NUM" --baseURL=https://$HEROKU_APP_NAME_STAGING.herokuapp.com --savePath=results.xml
       
       - store_test_results:
