@@ -67,3 +67,6 @@ workflows:
       - deploy-staging:
           requires: 
             - ci
+      - test-staging:
+          requires:
+            - deploy-staging
