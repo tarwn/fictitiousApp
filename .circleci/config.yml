@@ -60,9 +60,9 @@ jobs:
             node build.js $LR_APPLICATIONID --appId=$LR_APPID --apiKey=$LR_APIKEY --name="CircleCI-$CIRCLE_BUILD_NUM" --baseURL=https://$HEROKU_APP_NAME_STAGING.herokuapp.com --savePath=results.xml
       
       - store_test_results:
-          path: ~/build/launchready/results.xml
+          path: ~/project/build/launchready/results.xml
       - store_artifacts:
-          path: ~/build/launchready/results.xml
+          path: ~/project/build/launchready/results.xml
 
 workflows:
   version: 2
