@@ -40,7 +40,6 @@ jobs:
             fi
   
   test-staging:
-    working_directory: ~/build
     docker:
       - image: circleci/node:7.10
 
@@ -49,7 +48,9 @@ jobs:
 
       - run:
           name: LaunchReady Testing
-          command: run-launchready.sh https://$HEROKU_APP_NAME_STAGING.herokuapp.com
+          command: |
+            cd build
+            run-launchready.sh https://$HEROKU_APP_NAME_STAGING.herokuapp.com
       
       - store_test_results:
           path: ~/build/launchready/results.xml
