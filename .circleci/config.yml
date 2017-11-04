@@ -46,11 +46,12 @@ jobs:
     steps:
       - checkout
 
+      - run: cd build/launchready
+      - run: npm install
       - run:
           name: LaunchReady Testing
           command: |
-            cd build
-            run-launchready.sh https://$HEROKU_APP_NAME_STAGING.herokuapp.com
+            node build.js $LR_APPLICATIONID --appId=$LR_APPID --apiKey=$LR_APIKEY --name="CircleCI-$CIRCLE_BUILD_NUM" --baseURL=https://$HEROKU_APP_NAME_STAGING.herokuapp.com --savePath=results.xml
       
       - store_test_results:
           path: ~/build/launchready/results.xml
