@@ -8,6 +8,7 @@ jobs:
       before_deploy:
         - cp azure/web.config app
         - cd app
+        - pwd
       deploy: 
         provider: azure_web_apps
         site: $TRAVIS_APP_NAME_STAGING
@@ -19,6 +20,7 @@ jobs:
       before_deploy:
         - cp azure/web.config app
         - cd app
+        - pwd
       deploy: 
         provider: azure_web_apps
         site: $TRAVIS_APP_NAME_PRODUCTION
