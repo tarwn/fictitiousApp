@@ -3,12 +3,16 @@ language: node_js
 jobs:
   include:
     - stage: Deploy to staging
+      before_deploy:
+        - cd app
       deploy: 
         provider: azure_web_apps
         site: $TRAVIS_APP_NAME_STAGING
     - stage: LaunchReady Testing
       script: build/travis-launchready.sh
     - stage: Deploy to production
+      before_deploy:
+        - cd app
       deploy: 
         provider: azure_web_apps
         site: $TRAVIS_APP_NAME_PRODUCTION
