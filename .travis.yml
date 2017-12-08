@@ -2,14 +2,12 @@ language: node_js
 
 jobs:
   include:
-    - stage: CI
-      script: "Running unit tests here"
     - stage: Deploy to staging
       deploy: 
         provider: azure_web_apps
         site: $TRAVIS_APP_NAME_STAGING
     - stage: LaunchReady Testing
-      script: "Script goes here"
+      script: build/travis-launchready.sh
     - stage: Deploy to production
       deploy: 
         provider: azure_web_apps
