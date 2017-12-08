@@ -3,7 +3,10 @@ language: node_js
 jobs:
   include:
     - stage: Deploy to staging
+      install:
+        - npm install
       before_deploy:
+        - cp azure/web.config app
         - cd app
       deploy: 
         provider: azure_web_apps
@@ -11,7 +14,10 @@ jobs:
     - stage: LaunchReady Testing
       script: build/travis-launchready.sh
     - stage: Deploy to production
+      install:
+        - npm install
       before_deploy:
+        - cp azure/web.config app
         - cd app
       deploy: 
         provider: azure_web_apps
