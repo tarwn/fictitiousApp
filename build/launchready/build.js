@@ -154,9 +154,9 @@ function run(apiKey, appId, applicationId, testRunName, testRunConfigs) {
                 isFailed = false,
                 runId = runStatus.runId;
             
-            function pollForStatus() { 
+            function pollForStatus() {
                 return Promise.delay(pollDelay * 1000)
-                    .then(function () { 
+                    .then(function () {
                         return requestTestRunStatus(apiKey, appId, runId)
                             .then(function (runStatus) {
                                 isComplete = runStatus.isComplete;
@@ -181,7 +181,7 @@ function run(apiKey, appId, applicationId, testRunName, testRunConfigs) {
             }, pollForStatus)
                 .then(function () {
                     if (isFailed) {
-                        process.exit(1);
+                        process.exit(3);
                     }
 
                     log(1, "Downloading test run results as JUnit file");
@@ -194,5 +194,9 @@ function run(apiKey, appId, applicationId, testRunName, testRunConfigs) {
                             log(1, "LaunchReady Results Downloaded: " + savePath);
                         });
                 });
-        });
+        })
+        .catch(function (err) { 
+            console.error(err);
+            process.exit(4);            
+        }
 }

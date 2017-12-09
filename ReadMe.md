@@ -2,7 +2,7 @@
 Folder structure
 ==================
 
-THis is a mix of special files and application files. Some of the special files are
+This is a mix of special files and application files. Some of the special files are
 specific to build services, deployment environments, etc.
 
 * .circleci/config.yml - CircleCI Build Config (Location Required)
