@@ -1,4 +1,4 @@
-var promise = require("bluebird");
+var Promise = require("bluebird");
 
 module.exports = function promiseWhile(predicate, action) {
     function loop() {
