@@ -65,7 +65,13 @@ var runConfigs = {
     configs: configs
 };
 
-run(apiKey, appId, applicationId, testRunName, runConfigs);
+try {
+    run(apiKey, appId, applicationId, testRunName, runConfigs);
+}
+catch(err) {
+    console.error(err);
+    process.exit(2);
+}
 
 // ----------------------------- //
 
