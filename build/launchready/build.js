@@ -56,7 +56,7 @@ var apiKey = argv.apiKey,
 
 var configs = JSON.parse(argv.configs || "{}"),
     savePath = argv.savePath || "launchready_junit.xml",
-    site = argv.site || "http://app.launchready.co",
+    site = argv.site || "https://app.launchready.co",
     pollDelay = argv.pollDelay || 5,
     proxy = argv.proxy;
 
