@@ -6,8 +6,8 @@ jobs:
       install:
         - npm install
       before_deploy:
-        - cp azure/.deployment ./
-        - cp azure/web.config app
+        - cp environments/azure/.deployment ./
+        - cp environments/azure/web.config app
       deploy: 
         provider: azure_web_apps
         site: $TRAVIS_APP_NAME_STAGING
@@ -18,8 +18,8 @@ jobs:
       install:
         - npm install
       before_deploy:
-        - cp azure/.deployment ./
-        - cp azure/web.config app
+        - cp environments/azure/.deployment ./
+        - cp environments/azure/web.config app
       deploy: 
         provider: azure_web_apps
         site: $TRAVIS_APP_NAME_PRODUCTION
