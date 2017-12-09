@@ -45,6 +45,7 @@ function writeHelp() {
     console.log("   savePath         Save path for the JUnit.xml results file");
     console.log("   site             Internal option for testing script against staging/dev sites");
     console.log("   proxy            URL to direct traffic through (ex: http://127.0.0.1:8888 for fiddler)");
+    console.log("   errorOnFailure   Produce an exit error if any tests fail");
     console.log("");
 }
 
@@ -58,7 +59,8 @@ var configs = JSON.parse(argv.configs || "{}"),
     savePath = argv.savePath || "launchready_junit.xml",
     site = argv.site || "https://app.launchready.co",
     pollDelay = argv.pollDelay || 5,
-    proxy = argv.proxy;
+    proxy = argv.proxy,
+    errorOnFailure = argv.errorOnFailure;
 
 var runConfigs = {
     baseURL: baseURL,
@@ -151,8 +153,9 @@ function run(apiKey, appId, applicationId, testRunName, testRunConfigs) {
             log(1, "Test Run started with id " + runStatus.runId + " and " + runStatus.testCaseStatsTotal + " test cases");
 
             var isComplete = runStatus.isComplete,
-                isFailed = false,
-                runId = runStatus.runId;
+                isErrored = false,
+                runId = runStatus.runId,
+                isFailed = false;
             
             function pollForStatus() {
                 return Promise.delay(pollDelay * 1000)
@@ -166,9 +169,11 @@ function run(apiKey, appId, applicationId, testRunName, testRunConfigs) {
                                 if (runStatus.testCaseStatsCancelled > 0)
                                     status += ", " + runStatus.testCaseStatsCancelled + " Cancel";
                                 log(2, status);
+
+                                isFailed = runStatus.testCaseStatsCancelled + runStatus.testCaseStatsErrored + runStatus.testCaseStatsFailed > 0;
                             })
                             .catch(function (err) {
-                                isFailed = true;
+                                isErrored = true;
 
                                 log(1, "Error: " + err.message);
                                 console.error(err);
@@ -177,10 +182,10 @@ function run(apiKey, appId, applicationId, testRunName, testRunConfigs) {
             }
 
             promiseWhile(function () {
-                return !(isComplete || isFailed); //add timeout                
+                return !(isComplete || isErrored); //add timeout                
             }, pollForStatus)
                 .then(function () {
-                    if (isFailed) {
+                    if (isErrored) {
                         process.exit(3);
                     }
 
@@ -192,6 +197,13 @@ function run(apiKey, appId, applicationId, testRunName, testRunConfigs) {
                         })
                         .then(function () {
                             log(1, "LaunchReady Results Downloaded: " + savePath);
+
+                            if (isFailed && errorOnFailure) {
+                                process.exit(errorOnFailure);
+                            }
+                            else { 
+                                process.exit(0);
+                            }
                         });
                 });
         })

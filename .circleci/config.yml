@@ -57,7 +57,7 @@ jobs:
           command: |
             pwd
             cd build/launchready
-            node build.js $LR_APPLICATIONID --appId=$LR_APPID --apiKey=$LR_APIKEY --name="CircleCI-$CIRCLE_BUILD_NUM" --baseURL=https://$HEROKU_APP_NAME_STAGING.herokuapp.com --savePath=results.xml
+            node build.js $LR_APPLICATIONID --appId=$LR_APPID --apiKey=$LR_APIKEY --name="CircleCI-$CIRCLE_BUILD_NUM" --baseURL=https://$HEROKU_APP_NAME_STAGING.herokuapp.com --savePath=results.xml --errorOnFailure=100
       
       - store_test_results:
           path: ~/project/build/launchready/results.xml
