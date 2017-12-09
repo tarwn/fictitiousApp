@@ -195,8 +195,8 @@ function run(apiKey, appId, applicationId, testRunName, testRunConfigs) {
                         });
                 });
         })
-        .catch(function (err) { 
+        .catch(function (err) {
             console.error(err);
-            process.exit(4);            
-        }
+            process.exit(4);
+        });
 }
